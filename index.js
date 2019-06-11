@@ -12,7 +12,7 @@ const request = ('request-promise');
 const forwardingaddress = "https://boiling-inlet-58072.herokuapp.com/"
 
 app.get('/',(req,res) => {
-    resizeBy.send ('hello world!');
+    res.send ('hello world!');
 });
 app.listen(3000,()=>{
     console.log('example app listening on port 3000!');
