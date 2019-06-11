@@ -11,9 +11,12 @@ const querystring = require('querystring');
 const request = ('request-promise');
 const forwardingaddress = "https://boiling-inlet-58072.herokuapp.com/"
 
+app.set('port', (process.env.PORT || 5000))
+
 app.get('/',(req,res) => {
     res.send ('hello world!');
 });
-// app.listen(3000,()=>{
-//     console.log('example app listening on port 3000!');
-// });
+
+app.listen(app.get('port'), function() {
+    console.log("Node app is running at localhost:" + app.get('port'))
+  })
