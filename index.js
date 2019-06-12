@@ -2,7 +2,7 @@ const express = require ('express');
 const app = express();
 const crypto = require('crypto');
 const cookie = require('cookie');
-const nonce = require('nonce');
+const nonce = require('nonce')();
 const querystring = require('querystring');
 const request = ('request-promise');
 
