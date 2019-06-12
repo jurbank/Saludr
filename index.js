@@ -15,13 +15,13 @@ const apiKey = process.env.SHOPIFY_API_KEY;
 const apiSecret = process.env.SHOPIFY_API_SECRET;
 const scopes = "write_products"
 
-console.log(apiKey, 'apiKeyti')
+
 
 
 app.set('port', (process.env.PORT || 5000))
 
 app.get('/',(req,res) => {
-    res.send ('hello world!');
+    res.send (apiKey);
 });
 
 app.listen(app.get('port'), function() {
