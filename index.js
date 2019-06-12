@@ -1,6 +1,5 @@
 const apikey = process.env.SALUDR_API_KEY;
-const apisecret = process.env.SALUDR_API_SECRET
-const scopes = 'write_products';
+const apisecret = process.env.SALUDR_API_SECRET;
 const doteenv = require ('dotenv').config();
 const express = require ('express');
 const app = express();
@@ -17,11 +16,10 @@ const scopes = "write_products"
 
 
 
-
 app.set('port', (process.env.PORT || 5000))
 
 app.get('/',(req,res) => {
-    res.send ('hello world!');
+    res.send (apiKey);
 });
 
 app.listen(app.get('port'), function() {
