@@ -21,7 +21,7 @@ const scopes = "write_products"
 app.set('port', (process.env.PORT || 5000))
 
 app.get('/',(req,res) => {
-    res.send (apiKey);
+    res.send ('hello world!');
 });
 
 app.listen(app.get('port'), function() {
