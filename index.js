@@ -19,9 +19,10 @@ app.set('port', (process.env.PORT || 5000))
 app.get('/shopify',(req,res) => {
     const shop = req.query.shop;
     if (shop) {
-
+        console.log('has shop param!')
     } else {
-        return res.status(400).send('Missing shop parameter. Please add ?shop=your-dev-shop.')
+        console.log('no shop param :(')
+        return res.status(400).send('Missing shop parameter. Please add ?shop=your-dev-shop.myshopify.com')
     }
 });
 
