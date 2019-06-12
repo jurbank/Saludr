@@ -11,6 +11,13 @@ const querystring = require('querystring');
 const request = ('request-promise');
 const forwardingaddress = "https://boiling-inlet-58072.herokuapp.com/"
 
+const apiKey = process.env.SHOPIFY_API_KEY;
+const apiSecret = process.env.SHOPIFY_API_SECRET;
+const scopes = "write_products"
+
+console.log(apiKey, 'apiKeyti')
+
+
 app.set('port', (process.env.PORT || 5000))
 
 app.get('/',(req,res) => {
@@ -18,5 +25,5 @@ app.get('/',(req,res) => {
 });
 
 app.listen(app.get('port'), function() {
-    console.log("Node app is running at localhost:" + app.get('port'))
-  })
+console.log("Node app is running at localhost:" + app.get('port'))
+})
