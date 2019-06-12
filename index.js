@@ -10,18 +10,14 @@ const querystring = require('querystring');
 const request = ('request-promise');
 const forwardingaddress = "https://boiling-inlet-58072.herokuapp.com/"
 
-const apiKey = process.env.SHOPIFY_API_KEY;
-const apiSecret = process.env.SHOPIFY_API_SECRET;
+const apiKey = "f0c01221a35fc4164bdb0015ae7f8b41";
+const apiSecret = "d033f7ce079d7b048525d8af3cc7e9db";
 const scopes = "write_products"
-
-
 
 app.set('port', (process.env.PORT || 5000))
 
-console.log(apiKey, 'hellllllloo ====asfd')
-
-app.get('/',(req,res) => {
-    res.send ('hello world!');
+app.get('/shopify',(req,res) => {
+    console.log(req)
 });
 
 app.listen(app.get('port'), function() {
