@@ -17,7 +17,7 @@ const scopes = "write_products"
 app.set('port', (process.env.PORT || 5000))
 
 app.get('/shopify',(req,res) => {
-    console.log(req)
+    console.log(req.query)
 });
 
 app.listen(app.get('port'), function() {
