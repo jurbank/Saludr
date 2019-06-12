@@ -17,7 +17,12 @@ const scopes = "write_products"
 app.set('port', (process.env.PORT || 5000))
 
 app.get('/shopify',(req,res) => {
-    console.log(req.query)
+    const shop = req.query.shop;
+    if (shop) {
+
+    } else {
+        return res.status(400).send('Missing shop parameter. Please add ?shop=your-dev-shop.')
+    }
 });
 
 app.listen(app.get('port'), function() {
