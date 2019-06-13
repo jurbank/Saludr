@@ -4,7 +4,7 @@ const crypto = require('crypto');
 const cookie = require('cookie');
 const nonce = require('nonce')();
 const querystring = require('querystring');
-const request = ('request-promise');
+const request = require('request-promise');
 
 const apiKey = "f0c01221a35fc4164bdb0015ae7f8b41";
 const apiSecret = "d033f7ce079d7b048525d8af3cc7e9db";
@@ -35,7 +35,6 @@ app.get('/shopify',(req,res) => {
 app.get('/shopify/callback', (req, res) => {
     const { shop, hmac, code, state } = req.query;
     const stateCookie = cookie.parse(req.headers.cookie).state;
-    console.log(state, '---state', stateCookie, '---stateCookie')
     if (state != stateCookie) {
         return res.status(403).send('Request origin could not be verified')
     }
@@ -56,6 +55,7 @@ app.get('/shopify/callback', (req, res) => {
             client_secret: apiSecret,
             code
         }
+
 
         request.post(accessTokenRequestUrl, {json: accessTokenPayload})
             .then(accessTokenResponse => {
