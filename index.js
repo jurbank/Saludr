@@ -79,14 +79,29 @@ app.get('/shopify/callback', (req, res) => {
                 const apiRequestHeader = {
                     'X-Shopify-Access-Token': accessToken
                 }
-                request.post(apiRequestUrl, { headers: apiRequestHeader })
-                    .then(apiResponse => {
-                        console.log(apiResponse, 'apiResponse')
-                        res.end(apiResponse)
-                    }).catch(error => {
-                        console.log(error, 'error')
-                        res.status(error.statusCode).send(error.error.error_description)
-                    })
+                
+                request.post(apiRequestUrl, { 
+                    headers: apiRequestHeader,
+                    body:
+                    {
+                        "draft_order": {
+                            "line_items": [
+                            {
+                                "variant_id": 447654529,
+                                "quantity": 1
+                            }
+                            ]
+                        }
+                    },
+                    json: true
+                })
+                .then(apiResponse => {
+                    console.log(apiResponse, 'apiResponse')
+                    res.end(apiResponse)
+                }).catch(error => {
+                    console.log(error, 'error')
+                    res.status(error.statusCode).send(error.error.error_description)
+                })
                 // request.get(apiRequestUrl, { headers: apiRequestHeader })
                 //     .then(apiResponse => {
                 //         res.end(apiResponse)
