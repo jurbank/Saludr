@@ -72,15 +72,10 @@ app.get('/shopify/callback', (req, res) => {
           code,
         };
 
-
-
-
-
-
         request.post(accessTokenRequestUrl, {json: accessTokenPayload})
             .then(accessTokenResponse => {
                 const accessToken = accessTokenResponse.access_token;
-                const apiRequestUrl = 'https://' + shop + '/admin/products.json'; 
+                const apiRequestUrl = 'https://' + shop + '/admin/api/2019-04/products.json'; 
                 const apiRequestHeader = {
                     'X-Shopify-Access-Token': accessToken
                 }
