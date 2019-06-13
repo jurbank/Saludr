@@ -41,20 +41,40 @@ app.get('/shopify/callback', (req, res) => {
 
     if (shop && hmac && code) {
         const map = Object.assign({}, req.query);
+        delete map['signature'];
         delete map['hmac'];
         const message = querystring.stringify(map);
-        const generatedHash = crypto.createHmac('sha256', apiSecret).update(message).digest('hex')
-
-        if (generatedHash != hmac) {
-            return res.status(400).send('HMAC validation failed')
+        const providedHmac = Buffer.from(hmac, 'utf-8');
+        const generatedHash = Buffer.from(
+          crypto
+            .createHmac('sha256', apiSecret)
+            .update(message)
+            .digest('hex'),
+            'utf-8'
+          );
+        let hashEquals = false;
+    
+        try {
+          hashEquals = crypto.timingSafeEqual(generatedHash, providedHmac)
+        } catch (e) {
+          hashEquals = false;
+        };
+    
+        if (!hashEquals) {
+          return res.status(400).send('HMAC validation failed');
         }
-
+    
+        // DONE: Exchange temporary code for a permanent access token
         const accessTokenRequestUrl = 'https://' + shop + '/admin/oauth/access_token';
         const accessTokenPayload = {
-            client_id: apiKey,
-            client_secret: apiSecret,
-            code
-        }
+          client_id: apiKey,
+          client_secret: apiSecret,
+          code,
+        };
+
+
+
+
 
 
         request.post(accessTokenRequestUrl, {json: accessTokenPayload})
