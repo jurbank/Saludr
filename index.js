@@ -81,7 +81,7 @@ app.get('/shopify/callback', (req, res) => {
                 }
                 request.get(apiRequestUrl, { headers: apiRequestHeader })
                     .then(apiResponse => {
-                        res.end(apiResponse)
+                        res.end('hello')
                     }).catch(error => {
                         res.status(error.statusCode).send(error.error.error_description)
                     })
