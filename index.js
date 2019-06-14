@@ -5,7 +5,7 @@ const cookie = require('cookie');
 const nonce = require('nonce')();
 const querystring = require('querystring');
 const request = require('request-promise');
-
+// var bodyParser = require('body-parser');
 
 const apiKey = "f0c01221a35fc4164bdb0015ae7f8b41";
 const apiSecret = "d033f7ce079d7b048525d8af3cc7e9db";
@@ -34,9 +34,9 @@ app.get('/shopify',(req,res) => {
     }
 });
 
-app.post('/api', (req, res) => {
-    res.end('boom!' + req + res)
-})
+// app.post('/api', (req, res) => {
+//     res.end('boom!' + req + res)
+// })
 
 // API Url
 app.get('/shopify/callback', (req, res) => {
