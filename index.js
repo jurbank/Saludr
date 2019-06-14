@@ -12,7 +12,7 @@ const apiSecret = "d033f7ce079d7b048525d8af3cc7e9db";
 const scopes = "read_products"
 const forwardingAddress = 'https://saludr-2.herokuapp.com'
 
-app.use(bodyParser())
+// app.use(bodyParser())
 
 app.set('port', (process.env.PORT || 5000))
 
