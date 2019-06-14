@@ -8,7 +8,7 @@ const request = require('request-promise');
 
 const apiKey = "f0c01221a35fc4164bdb0015ae7f8b41";
 const apiSecret = "d033f7ce079d7b048525d8af3cc7e9db";
-const scopes = "write_orders"
+const scopes = "read_orders"
 const forwardingAddress = 'https://saludr-2.herokuapp.com'
 
 app.set('port', (process.env.PORT || 5000))
@@ -75,39 +75,16 @@ app.get('/shopify/callback', (req, res) => {
         request.post(accessTokenRequestUrl, {json: accessTokenPayload})
             .then(accessTokenResponse => {
                 const accessToken = accessTokenResponse.access_token;
-                const apiRequestUrl = 'https://' + shop + '/admin/api/2019-04/draft_orders.json'; 
+                const apiRequestUrl = 'https://' + shop + '/admin/api/2019-04/orders.json'; 
                 const apiRequestHeader = {
                     'X-Shopify-Access-Token': accessToken
                 }
-                
-                request.post(apiRequestUrl, { 
-                    headers: apiRequestHeader,
-                    body:
-                    {
-                        "draft_order": {
-                            "line_items": [
-                            {
-                                "variant_id": 447654529,
-                                "quantity": 1
-                            }
-                            ]
-                        }
-                    },
-                    json: true
-                })
-                .then(apiResponse => {
-                    console.log(apiResponse, 'apiResponse')
-                    res.end(apiResponse)
-                }).catch(error => {
-                    console.log(error, 'error')
-                    res.status(error.statusCode).send(error.error.error_description)
-                })
-                // request.get(apiRequestUrl, { headers: apiRequestHeader })
-                //     .then(apiResponse => {
-                //         res.end(apiResponse)
-                //     }).catch(error => {
-                //         res.status(error.statusCode).send(error.error.error_description)
-                //     })
+                request.get(apiRequestUrl, { headers: apiRequestHeader })
+                    .then(apiResponse => {
+                        res.end(apiResponse)
+                    }).catch(error => {
+                        res.status(error.statusCode).send(error.error.error_description)
+                    })
             }).catch(error => {
                 res.status(error.statusCode).send(error.error.error_description)
             })
