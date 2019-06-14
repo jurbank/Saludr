@@ -5,11 +5,14 @@ const cookie = require('cookie');
 const nonce = require('nonce')();
 const querystring = require('querystring');
 const request = require('request-promise');
+var bodyParser = request('body-parser');
 
 const apiKey = "f0c01221a35fc4164bdb0015ae7f8b41";
 const apiSecret = "d033f7ce079d7b048525d8af3cc7e9db";
-const scopes = "read_draft_orders"
+const scopes = "read_products"
 const forwardingAddress = 'https://saludr-2.herokuapp.com'
+
+app.use(bodyParser())
 
 app.set('port', (process.env.PORT || 5000))
 
@@ -30,6 +33,10 @@ app.get('/shopify',(req,res) => {
         return res.status(400).send('Missing shop parameter. Please add ?shop=your-dev-shop.myshopify.com')
     }
 });
+
+app.post('/api', (req, res) => {
+    res.end('boom!' + req + res)
+})
 
 // API Url
 app.get('/shopify/callback', (req, res) => {
@@ -80,7 +87,7 @@ app.get('/shopify/callback', (req, res) => {
                     'X-Shopify-Access-Token': accessToken
                 }
                 request.get(apiRequestUrl, { headers: apiRequestHeader })
-                    .then(apiResponse => {
+                    .then(apiResponse => { 
                         res.end('hello')
                     }).catch(error => {
                         res.status(error.statusCode).send(error.error.error_description)
