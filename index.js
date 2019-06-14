@@ -8,7 +8,7 @@ const request = require('request-promise');
 
 const apiKey = "f0c01221a35fc4164bdb0015ae7f8b41";
 const apiSecret = "d033f7ce079d7b048525d8af3cc7e9db";
-const scopes = "write_products"
+const scopes = "write_orders"
 const forwardingAddress = 'https://saludr-2.herokuapp.com'
 
 app.set('port', (process.env.PORT || 5000))
